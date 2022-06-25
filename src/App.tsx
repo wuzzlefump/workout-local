@@ -1,5 +1,4 @@
 import * as React from "react";
-import { CookiesProvider } from 'react-cookie';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home/Home';
 import Food from './pages/Food/Food';
@@ -23,13 +22,11 @@ function App() {
   }
   const [state, setState] =React.useState<PossibleLocations>("home")
   return (
-    <CookiesProvider>
         <Layout cheat={{nav:(x:PossibleLocations)=>setState(x)}} >
           {
             possibleLocations[state]
           }
         </Layout>
-    </CookiesProvider>
   );
 }
 

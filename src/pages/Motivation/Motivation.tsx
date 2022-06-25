@@ -1,15 +1,14 @@
 import * as React from "react"
-import Layout from "../../components/Layout/Layout"
-import { useCookies } from 'react-cookie';
+import useLocalStorage from "react-use-localstorage";
 import styles from "./Motivation.module.css"
 import showToast from "../../components/showToast/showToast";
 import { ToastContainer } from "react-toastify";
-import neverExpire from "../../Tools/NeverExpire";
+
 const list = require("./motivation.json")
 export default function Motivation(){
-const [cookies, setCookie] = useCookies(['user']);
-const [quoteCookies, setQuoteCookie, removeQuoteCookie] = useCookies(['quote']);
-const [goalCookies, setGoalCookie, removeGoalCookies] = useCookies(['goal']);
+const [userItem, setUserItem] = useLocalStorage('user', localStorage.getItem("user") ?? undefined);
+const [goalItem, setGoalItem] = useLocalStorage('goal', localStorage.getItem("goal") ?? undefined);
+const [quoteItem, setQuoteItem] = useLocalStorage('quote', localStorage.getItem("quote") ?? undefined);
 const [goal,setGoal] = React.useState<string>("")
 const [quote,setQuote] = React.useState<string>("")
 
@@ -20,26 +19,26 @@ const getRandomQuote = (newList:string[])=>{
 }
 const [currentQuote,setCurrentQuote]=React.useState(getRandomQuote(list))
 const nextQuote =()=>{
-    if(quoteCookies.quote){
-        setCurrentQuote(getRandomQuote([...list,...quoteCookies.quote.quoteList]))
+    if(quoteItem && quoteItem.length > 0){
+        setCurrentQuote(getRandomQuote([...list,...JSON.parse(quoteItem).quoteList]))
     }else{
         setCurrentQuote(getRandomQuote(list))
     }
 }
 const addQuote = ()=>{
-    if(quoteCookies.quote){
-        setQuoteCookie("quote",{quoteList:[...quoteCookies.quote.quoteList,`${quote} -yourself`]}, {path:"/",maxAge:neverExpire()})
+    if(quoteItem && quoteItem.length > 0){
+        setQuoteItem(JSON.stringify({quoteList:[...JSON.parse(quoteItem).quoteList,`${quote} -yourself`]}))
         setQuote("")
         showToast("Quote Submitted","success")
     }else{
-        setQuoteCookie("quote",{quoteList:[`${quote} -yourself}`]},{path:"/",maxAge:neverExpire()})
+        setQuoteItem(JSON.stringify({quoteList:[`${quote} -yourself}`]}))
         setQuote("")
         showToast("Quote Submitted","success")
     }
 }
 
 const setNewGoal =()=>{
-    setGoalCookie("goal",goal,{path:"/", maxAge:neverExpire()})
+    setGoalItem(goal)
     showToast("Goal Set", "success")
 }
     return(
@@ -48,7 +47,7 @@ const setNewGoal =()=>{
                 <div className={styles.goalCard}>
                     <h3>Goal</h3>
                     {
-                    goalCookies.goal ? <div><p>{goalCookies.goal}</p><button onClick={()=>{removeGoalCookies("goal",{path:"/"});showToast("Goal Cookies Removed","info")}}>clear goal</button></div>:
+                    goalItem && goalItem.length > 0 ? <div><p>{goalItem}</p><button onClick={()=>{setGoalItem("");showToast("Goal Removed","info")}}>clear goal</button></div>:
                     <div className={styles.goalCard2}><input value={goal} onChange={(e)=>{setGoal(e.target.value)}} placeholder="Goal"/>
                     <button className={styles.submit}  onClick={()=> setNewGoal()}>set goal</button></div>
                     }
@@ -58,7 +57,7 @@ const setNewGoal =()=>{
                 <div className={styles.addCard}>add Motivation
                     <input value={quote} onChange={(e)=>setQuote(e.target.value)} />
                     <button className={styles.submit}  onClick={()=>addQuote()}> Add Quote</button>
-                    <button className={styles.clear} onClick={()=>{removeQuoteCookie("quote",{path:"/"});showToast("Quote Cookies Removed","info")}}>clear homemade quotes</button>
+                    <button className={styles.clear} onClick={()=>{setQuoteItem("");showToast("Quotes Removed","info")}}>clear homemade quotes</button>
                 </div>
             </div>)
 }

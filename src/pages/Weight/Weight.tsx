@@ -1,47 +1,48 @@
 import * as React from "react"
 import styles from "./Weight.module.css"
-import { useCookies } from 'react-cookie';
 import Graph from "../../components/Graph/Graph";
 import showToast from "../../components/showToast/showToast";
-import { ToastClassName, ToastContainer } from "react-toastify";
-import neverExpire from "../../Tools/NeverExpire";
+import { ToastContainer } from "react-toastify";
+import useLocalStorage from "react-use-localstorage";
 
 const moment = require("moment")
 
 export default function Weight(){
-const [userCookies, setUserCookie] = useCookies(["user"]);
-const [weightCookies, setWeightCookies, removeWeightCookies] = useCookies(["weight"]);
+
+    const [userItem, setUserItem] = useLocalStorage('user', localStorage.getItem("user") ?? undefined);
+    const [weightItem, setWeightItem] = useLocalStorage('weight', localStorage.getItem("weight") ?? undefined);
+
 
 const [weight,setWeight]=React.useState<string>("")
 const submitWeight =()=>{
-    if(weightCookies.weight){
+    if(weightItem && weightItem.length > 0){
         let newWeight = weight ?? 0
         let weightObj = {date: new Date().toLocaleDateString(), weight:parseFloat(newWeight) }
-        setWeightCookies("weight",{...weightObj, all:[...weightCookies.weight.all,weightObj]},{path:"/",maxAge:neverExpire()})
+        setWeightItem(JSON.stringify({...weightObj, all:[...JSON.parse(weightItem).all,weightObj]}))
         showToast("Weight Submitted","success")
     }else{
         let newWeight = weight ?? 0
         let weightObj = {date: new Date().toLocaleDateString(), weight:parseFloat(newWeight) }
-        setWeightCookies("weight",{...weightObj, all:[weightObj]},{path:"/",maxAge:neverExpire()})
+        setWeightItem(JSON.stringify({...weightObj, all:[weightObj]}))
         showToast("Weight Submitted","success")
     }
 }
-const labels = weightCookies.weight ? weightCookies.weight.all.map((time: any, key:number)=>time.date + "("+(key + 1).toString()+")"):[]
-const datasets = weightCookies.weight ? [{label: "Weight (lbs)",data:weightCookies.weight.all.map((item:any)=>item.weight), borderColor:"green", backgroundColor:"green" }]:[]
+const labels = weightItem && weightItem.length > 0 ? JSON.parse(weightItem).all.map((time: any, key:number)=>time.date + "("+(key + 1).toString()+")"):[]
+const datasets = weightItem && weightItem.length > 0  ? [{label: "Weight (lbs)",data:JSON.parse(weightItem).all.map((item:any)=>item.weight), borderColor:"green", backgroundColor:"green" }]:[]
 const graphData = {labels:labels, datasets:datasets} 
 const clearWeightCookies = ()=>{
-    removeWeightCookies("weight",{path:"/"})
-    showToast("Weight Cookies Removed","info")
+    setWeightItem("")
+    showToast("Weigh Ins Removed","info")
 }
 
     return(
             <div className={styles.container}>
                 <ToastContainer/>
                 {
-                    userCookies.user ? <div className={styles.currentUserCard}>
+                    userItem && userItem.length > 0  ? <div className={styles.currentUserCard}>
                         <h1>Track Your Weight</h1>
                     <div>
-                        {weightCookies.weight ? <Graph
+                        {weightItem && weightItem.length > 0 ? <Graph
                          options={{plugins:{legend:{position:"bottom" as const},title:{display:true, text:"Weight"}}, responsive:true}}
                          data={graphData}
                           />: "Enter your weight to track it on the graph"}

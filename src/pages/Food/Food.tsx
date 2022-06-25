@@ -1,25 +1,24 @@
 import * as React from "react"
-import { useCookies } from 'react-cookie';
+import useLocalStorage from 'react-use-localstorage';
 import DatePicker from "react-datepicker";
 import styles from "./Food.module.css"
 import "react-datepicker/dist/react-datepicker.css";
 import showToast from "../../components/showToast/showToast";
 import { ToastContainer } from "react-toastify";
-import neverExpire from "../../Tools/NeverExpire";
 
 
 export default function Food(){
-const [foodCookies, setFoodCookie,removeFoodCookies] = useCookies(['food']);
+const [foodItem, setFoodItem] = useLocalStorage("food", localStorage.getItem("food") ?? undefined)
 const [startDate,setStartDate] = React.useState<any>(new Date())
 const [foodText, setFoodText] = React.useState<string>("")
 const submitFood = ()=>{
     let foodObj = {date:startDate.toLocaleDateString(undefined,{}), food:foodText}
-    if(foodCookies.food){
-        setFoodCookie("food",{...foodObj, foodList:[...foodCookies.food.foodList,foodObj]},{path:"/", maxAge:neverExpire()})
+    if(foodItem && foodItem.length > 0){
+        setFoodItem(JSON.stringify({...foodObj, foodList:[...JSON.parse(foodItem).food.foodList,foodObj]}))
         showToast("Food Submitted","success")
     }else{
         
-        setFoodCookie("food",{...foodObj, foodList:[foodObj]},{path:"/", maxAge:neverExpire()})
+        setFoodItem(JSON.stringify({...foodObj, foodList:[foodObj]}))
         showToast("Food Submitted","success")
     }
 }
@@ -32,12 +31,12 @@ const submitFood = ()=>{
                 <DatePicker value={startDate} onChange={(date:any)=>{ setStartDate(date)}}></DatePicker>
                 </div>
                 
-                { foodCookies.food ?
+                { foodItem && foodItem.length > 0 ?
                 <div className={styles.listCard}>
                     <h3>Food List</h3>
                     {
-                        foodCookies.food.foodList.length > 0 ?
-                        foodCookies.food.foodList.filter((item:any) => item.date === startDate.toLocaleDateString(undefined,{})).map((item:any) => (
+                        JSON.parse(foodItem).foodList.length > 0 ?
+                        JSON.parse(foodItem).foodList.filter((item:any) => item.date === startDate.toLocaleDateString(undefined,{})).map((item:any) => (
                          <p>{item.food}</p>
                         )) :
                         "no food"
@@ -49,7 +48,7 @@ const submitFood = ()=>{
                     <textarea value={foodText} onChange={(e)=>setFoodText(e.target.value)}/>
                     <div className={styles.actionContainer}>
                         <button className={styles.submit} onClick={()=>{submitFood()}} >Submit</button>
-                        <button className={styles.clear} onClick={()=>{removeFoodCookies("food",{path:"/"});showToast("Cookies Removed","info")}}>Remove Food Cookies</button>
+                        <button className={styles.clear} onClick={()=>{setFoodItem(""); showToast("Food Removed","info")}}>Remove Food</button>
                     </div>
                 </div>
             </div>)

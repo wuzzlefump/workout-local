@@ -1,14 +1,13 @@
 import * as React from "react"
-import { useCookies } from 'react-cookie';
 import styles from "./Home.module.css"
+import useLocalStorage from 'react-use-localstorage';
 import Select from "react-select"; 
 import { ToastContainer } from "react-toastify";
 import showToast from "../../components/showToast/showToast";
-import neverExpire from "../../Tools/NeverExpire";
 
 export default function Home(){
 type SelectOption = {label:string; value:string}
-const [cookies, setCookie,removeCookie] = useCookies(['user']);
+const [userItem, setUserItem] = useLocalStorage('user', localStorage.getItem("user") ?? undefined);
 const [name, setName] = React.useState<string>("")
 const [height, setHeight] = React.useState<string>("0")
 const [age, setAge] = React.useState<string>("0")
@@ -21,25 +20,25 @@ let payload = {
     sex:sex.value,
     age
 }
-setCookie("user",payload,{path:"/", maxAge:neverExpire()})
+setUserItem(JSON.stringify(payload))
 showToast("Info Submitted","success")
 }
 const clearCookies=()=>{
-removeCookie("user",{path:"/"})
-showToast("Cookies Removed", "info")
+setUserItem("")
+showToast("User Storage Removed", "info")
 }
 
     return(
             <div className={styles.container}>
                 <ToastContainer/>
-                {cookies.user ?
+                {userItem && userItem.length > 0  ?
                  <div className={styles.currentUserCard}>
-                    <h2>{cookies.user.name}</h2>
-                    <h3>Height: {cookies.user.height} inches</h3>
-                    <h3>Age: {cookies.user.age} years</h3>
-                    <h3>Sex: {cookies.user.sex}</h3>
+                    <h2>{JSON.parse(userItem).name}</h2>
+                    <h3>Height: {JSON.parse(userItem).height} inches</h3>
+                    <h3>Age: {JSON.parse(userItem).age} years</h3>
+                    <h3>Sex: {JSON.parse(userItem).sex}</h3>
                     <h4>Welcome to Workout Cookies!</h4>
-                    <button className={styles.submit} onClick={()=>clearCookies()} > Clear Cookies</button>
+                    <button className={styles.submit} onClick={()=>clearCookies()} > Clear Storage</button>
                     
                 </div>
                   :

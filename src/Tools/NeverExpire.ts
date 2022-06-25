@@ -1,3 +1,0 @@
-export default function neverExpire (){
-    return 99999999999999999999999999999999999999999999999999;
-}

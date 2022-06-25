@@ -1,6 +1,6 @@
 {
-  "name": "workout-cookie",
-  "homepage": "https://wuzzlefump.github.io/workout-cookies",
+  "name": "workout-local",
+  "homepage": "https://wuzzlefump.github.io/workout-local",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +18,6 @@
     "react": "^18.1.0",
     "react-avatar": "^5.0.1",
     "react-chartjs-2": "^4.2.0",
-    "react-cookie": "^4.1.1",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.1.0",
     "react-loading": "^2.0.3",
@@ -28,6 +27,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.3.2",
     "react-toastify": "^9.0.4",
+    "react-use-localstorage": "^3.5.3",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
