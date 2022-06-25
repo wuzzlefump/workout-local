@@ -1,0 +1,53 @@
+.body{
+    height:100vh;
+    overflow:scroll
+}
+
+.header{
+height:5vh;
+background-color: rgba(218, 255, 218, 0.39);
+box-shadow: 2 2 2 black;
+font-size: larger;
+font-weight: bolder;
+}
+.sideNav{
+    position:sticky;
+    background-color:#fefefe;
+    height:95vh;
+    padding-inline-start: 5px;
+    padding-inline-end: 5px;
+}
+.container{
+    display: grid;
+    grid-template-columns: 200px auto;
+    height: 95vh;
+    background-color: lightgray;
+    overflow: scroll;
+}
+
+.sideNavContent{
+    position:fixed;
+    padding-block-start:10px ;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    gap:5px
+}
+
+.sideNavContent button{
+ border:none;
+ height:40px;
+ width:190px;
+ background-color: rgba(218, 255, 218, 0.39);
+ cursor: pointer;
+}
+
+.collapseButton{
+    height:5vh ;
+    border-top: black 1px solid;
+    padding-inline-start: 60px;
+    cursor: pointer;
+}
+
+
+

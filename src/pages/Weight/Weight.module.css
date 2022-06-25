@@ -1,0 +1,82 @@
+.newUserCard{
+    margin-top: 20vh;
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    min-height: 500px;
+    box-shadow:5px 5px 5px black;
+    display:grid;
+    grid-template-columns: auto;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    align-items: center;
+    text-align: center;
+}
+.newUserCard input{
+    max-height: 38px;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    
+}
+
+.currentUserCard input{
+    max-height: 38px;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+}
+.currentUserCard{
+    margin-top: 10vh;
+    background-color: whitesmoke;
+    max-width: 600px;
+    text-align: center;
+    border-radius: 10px;
+    min-height: 700px;
+    box-shadow:5px 5px 5px black;
+    display:grid;
+    grid-template-columns: auto;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+    margin-block-end: 20px;
+}
+.clear{
+    height: 40px;
+    width:100px;
+    background-color: lightgray;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    cursor: pointer;
+    margin-inline-end: 300px;
+}
+.submittwo{
+    height: 40px;
+    width:100px;
+    background-color: rgba(218, 255, 218, 0.39);
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    cursor: pointer;
+}
+.container{
+    height:95vh;
+    width:inherit;
+    display:grid;
+    justify-content: center;
+    overflow: scroll;
+}
+
+.actionContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}

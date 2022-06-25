@@ -1,0 +1,118 @@
+.goalCard{
+    margin-top: 10vh;
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    min-height: 200px;
+    box-shadow:5px 5px 5px black;
+    display:grid;
+    grid-template-columns: auto;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+.goalCard2{
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    display:grid;
+    grid-template-columns: auto;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+
+.goalCard2 input{
+    max-height: 38px;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.quoteCard{
+    margin-top: 10vh;
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    min-height: 200px;
+    box-shadow:5px 5px 5px black;
+    display:grid;
+    grid-template-columns: auto;
+    padding-block-start: 50px;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: larger;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+
+}
+
+.addCard{
+    margin-top: 10vh;
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    min-height: 200px;
+    box-shadow:5px 5px 5px black;
+    display:grid;
+    grid-template-columns: auto;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    gap:10px
+}
+
+.addCard input{
+    max-height: 38px;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.submit{
+    max-height: 40px;
+    width:200px;
+    justify-self:center;
+    background-color: rgba(218, 255, 218, 0.39);
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    cursor: pointer;
+
+}
+
+.clear{
+    max-height: 40px;
+    width:200px;
+    justify-self:center;
+    background-color: lightgray;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    cursor: pointer;
+
+}
+.container{
+    display: grid;
+    height: 95vh;
+    overflow: scroll;
+    grid-template-columns: auto;
+    gap:20px;
+    justify-content: center;
+}

@@ -1,0 +1,95 @@
+.clear{
+    height: 40px;
+    width:100px;
+    background-color: lightgray;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    cursor: pointer;
+}
+.submit{
+    height: 40px;
+    width:100px;
+    background-color: rgba(218, 255, 218, 0.39);
+    border-radius: 5px;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    cursor: pointer;
+}
+.container{
+    height:95vh;
+    width:inherit;
+    display:grid;
+    justify-content: center;
+    overflow: scroll;
+}
+
+.addCard{
+    margin-top: 10vh;
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    min-height: 400px;
+    box-shadow:5px 5px 5px black;
+    display:grid;
+    grid-template-columns: auto;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+    margin-block-end: 20px;
+}
+
+.actionContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.headerCard{
+    margin-top: 10vh;
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    height: 200px;
+    overflow: scroll;
+    box-shadow:5px 5px 5px black;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+    margin-block-end: 20px;
+}
+.listCard{
+    margin-top: 10vh;
+    background-color: whitesmoke;
+    min-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    height: 400px;
+    overflow: scroll;
+    box-shadow:5px 5px 5px black;
+    padding-inline-start: 10px;
+    padding-inline-end:10px;
+    margin-inline-start: 20px;
+    margin-inline-end: 20px;
+    margin-block-end: 20px;
+}
+input{
+    max-height: 38px;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+}
+
+textarea{
+    border-radius: 5px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+}
