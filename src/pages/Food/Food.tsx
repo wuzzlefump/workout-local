@@ -13,8 +13,11 @@ const [startDate,setStartDate] = React.useState<any>(new Date())
 const [foodText, setFoodText] = React.useState<string>("")
 const submitFood = ()=>{
     let foodObj = {date:startDate.toLocaleDateString(undefined,{}), food:foodText}
+    console.log(foodObj)
     if(foodItem && foodItem.length > 0){
-        setFoodItem(JSON.stringify({...foodObj, foodList:[...JSON.parse(foodItem).food.foodList,foodObj]}))
+        let parsedItem = JSON.parse(foodItem)
+        console.log(parsedItem)
+        setFoodItem(JSON.stringify({...foodObj, foodList:[...parsedItem.foodList,foodObj]}))
         showToast("Food Submitted","success")
     }else{
         

@@ -14,7 +14,7 @@ export default function Workout(){
     const submitExercise = ()=>{
         let exerciseObj = {date:startDate.toLocaleDateString(undefined,{}), exercise:exerciseText, duration:duration? parseInt(duration): 0 }
         if(exerciseItem  && exerciseItem.length > 0 ){
-            setExerciseItem(JSON.stringify({...exerciseObj, exerciseList:[...JSON.parse(exerciseItem).exercise.exerciseList,exerciseObj]}))
+            setExerciseItem(JSON.stringify({...exerciseObj, exerciseList:[...JSON.parse(exerciseItem).exerciseList,exerciseObj]}))
             showToast("Exercise Submitted","success")
         }else{
             setExerciseItem(JSON.stringify({...exerciseObj, exerciseList:[exerciseObj]}))
